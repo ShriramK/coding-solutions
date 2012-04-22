@@ -1,3 +1,4 @@
+#http://codeforces.com/contest/177/problem/G1
 import sys
 val = raw_input()
 li = val.split()
