@@ -1,3 +1,4 @@
+# http://www.spoj.pl/problems/ONP/
 import sys
 
 def transform( input ):
