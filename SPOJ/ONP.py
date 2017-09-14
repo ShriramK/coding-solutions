@@ -1,10 +1,10 @@
 # http://www.spoj.pl/problems/ONP/
 import sys
 
-def transform( input ):
+def transform(input_expression):
 	output = ""
 	li = []
-	for i in input:
+	for i in input_expression:
 		if str.isalpha(i):
 			output += i
 		elif i == '(':
@@ -15,29 +15,27 @@ def transform( input ):
 				output += temp
 				temp = li.pop()
 		else:
-			if li[len(li)-1] == '(' or pri(i) < pri(li[len(li)-1]):
+			if li[len(li) - 1] == '(' or \
+				det_priority(i) < det_priority(li[len(li) - 1]):
 				li.append(i)
 			else:
 				output += li.pop()
-				li.append(i)				
+				li.append(i)			
 	return output
 
-def pri(oprtr):
+def det_priority(operator_param):
 	val = -1
-	if oprtr == '+':
-		val = 0
-	elif oprtr == '-':
-		val = 1
-	elif oprtr == '*':
-		val = 2
-	elif oprtr == '/':
-		val = 3
-	elif oprtr == '^':
-		val = 4
-	elif oprtr == '(':
-		val = 5
+	operator_values = {
+		'+': 0,
+		'-': 1,
+		'*': 2,
+		'/': 3,
+		'^': 4,
+		'(': 5,
+		}
+	val = operator_values[operator_param]
 	return val
 
 size = int(raw_input())
 for i in range(size):
-	print transform(raw_input()) 
+	print transform(raw_input())
