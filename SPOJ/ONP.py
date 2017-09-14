@@ -1,10 +1,10 @@
 # http://www.spoj.pl/problems/ONP/
 import sys
 
-def transform(input_expression):
+def transform_expression(algebraic_expression):
 	output = ""
 	li = []
-	for i in input_expression:
+	for i in algebraic_expression:
 		if str.isalpha(i):
 			output += i
 		elif i == '(':
@@ -36,6 +36,6 @@ def det_priority(operator_param):
 	val = operator_values[operator_param]
 	return val
 
-size = int(raw_input())
-for i in range(size):
-	print transform(raw_input())
+num_of_expressions = int(raw_input())
+for i in range(num_of_expressions):
+	print transform_expression(raw_input())
