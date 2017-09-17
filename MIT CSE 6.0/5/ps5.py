@@ -12,7 +12,9 @@ CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, \
+    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, \
+    's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
 }
 
 # -----------------------------------
@@ -29,11 +31,11 @@ def load_words():
     take a while to finish.
     """
     print "Loading word list from file..."
-    # inFile: file
-    inFile = open(WORDLIST_FILENAME, 'r', 0)
+    # in_file: file
+    in_file = open(WORDLIST_FILENAME, 'r', 0)
     # wordlist: list of strings
     wordlist = []
-    for line in inFile:
+    for line in in_file:
         wordlist.append(line.strip().lower())
     print "  ", len(wordlist), "words loaded."
     return wordlist
@@ -50,7 +52,7 @@ def get_frequency_dict(sequence):
     # freqs: dictionary (element_type -> int)
     freq = {}
     for x in sequence:
-        freq[x] = freq.get(x,0) + 1
+        freq[x] = freq.get(x, 0) + 1
     return freq
 
 
@@ -118,15 +120,15 @@ def deal_hand(n):
     n: int >= 0
     returns: dictionary (string -> int)
     """
-    hand={}
+    hand = {}
     num_vowels = n / 3
     
     for i in range(num_vowels):
-        x = VOWELS[random.randrange(0,len(VOWELS))]
+        x = VOWELS[random.randrange(0, len(VOWELS))]
         hand[x] = hand.get(x, 0) + 1
         
     for i in range(num_vowels, n):    
-        x = CONSONANTS[random.randrange(0,len(CONSONANTS))]
+        x = CONSONANTS[random.randrange(0, len(CONSONANTS))]
         hand[x] = hand.get(x, 0) + 1
         
     return hand
@@ -151,10 +153,10 @@ def update_hand(hand, word):
 	returns: dictionary (string -> int)
 	"""
 	# TO DO ...
-	newHand = hand.copy()
+	new_hand = hand.copy()
 	for i in word:
-		newHand[i] -= 1
-	return newHand
+		new_hand[i] -= 1
+	return new_hand
 
 #
 # Problem #3: Test word validity
@@ -170,21 +172,21 @@ def is_valid_word(word, hand, word_list):
 	word_list: list of lowercase strings
 	"""
 	# TO DO ...
-	newHand = hand.copy()
+	new_hand = hand.copy()
 	con = False
 	for i in word:
-		if hand.get(i,0) != 0:#hand.get(i,0):
+		if hand.get(i, 0) != 0:# hand.get(i,0):
 			con = True
-			if newHand.get(i,0) != 0:
-				newHand[i] -= 1
+			if new_hand.get(i,0) != 0:
+				new_hand[i] -= 1
 			else:
 				return False
 		else:
 			break
-	if con == False:
+	if not con:
 		return con
-	#for i in newHand.keys():
-		#if newHand[i] != 0:
+	#for i in new_hand.keys():
+		#if new_hand[i] != 0:
 			#return False
 	for i in word_list:
 		if word == i:
@@ -222,34 +224,35 @@ def play_hand(hand, word_list):
 	  word_list: list of lowercase strings
 	"""
 	# TO DO ...
-	#print "play_hand not implemented." # replace this with your code...
+	# print "play_hand not implemented." # replace this with your code...
 	print 'Current Hand: ', hand
 	print 'Enter a word or a ''.'' to indicate that you are finished: '
 	word = raw_input()
 	total = 0
-	while( word != '.' ):
-		if( not is_valid_word(word,hand,word_list) ):
+	while word != '.':
+		if not is_valid_word(word, hand, word_list):
 			print "Invalid word. Please enter another word"
 			word = raw_input()
 		else:
 			for i in word:
-				if hand.get(i,0) != 0:
+				if hand.get(i, 0) != 0:
 					hand[i] -= 1
-			#hand = update_hand(hand, word)
-			wS = get_word_score(word, HAND_SIZE)
-			total += wS
-			print word,' earned ',wS,' points. Total: ', total, ' points.'
-			print 'Hand ',hand
-			#check for unused letters
+			# hand = update_hand(hand, word)
+			word_score = get_word_score(word, HAND_SIZE)
+			total += word_score
+			print word,' earned ', word_score, ' points.'
+			print 'Total: ', total, ' points.'
+			print 'Hand ', hand
+			# check for unused letters
 			cnt = 0
 			for i in hand.keys():
 				cnt += hand[i]
-			if cnt == 0:
+			if not cnt:
 				word = '.'
 			else:
 				print 'Please enter a word'
 				word = raw_input()
-	print 'Total score: ',total,' points.'
+	print 'Total score: ', total,' points.'
 
 #
 # Problem #5: Playing a game
@@ -271,11 +274,14 @@ def play_game(word_list):
 	* If the user inputs anything else, ask them again.
 	"""
 	# TO DO ...
-	#play_hand(deal_hand(HAND_SIZE), word_list) # delete this once you've completed Problem #4
+	# play_hand(deal_hand(HAND_SIZE), word_list)
+	# delete this once you've completed Problem #4
 	## uncomment the following block of code once you've completed Problem #4
 	hand = deal_hand(HAND_SIZE) # random init
 	while True:
-		cmd = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+		input_instruction = 'Enter n to deal a new hand, r to replay the last'
+		input_instruction += ' hand, or e to end game: '
+		cmd = raw_input(input_instruction)
 		if cmd == 'n':
 			hand = deal_hand(HAND_SIZE)
 			play_hand(hand.copy(), word_list)
@@ -292,10 +298,10 @@ def play_game(word_list):
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
-	#print "Shriram testing it as per instructions in pdf"
-	#print get_word_score("shriram", 7)
-	#print get_word_score("aeio",4)
+	# print "Shriram testing it as per instructions in pdf"
+	# print get_word_score("shriram", 7)
+	# print get_word_score("aeio", 4)
 	word_list = load_words()	
 	play_game(word_list)
-	#hand = {'b':0, 'a':1, 'c':1, 'e':1}
-	#print update_hand(hand, 'ace')#getdisplay_hand(hand)
+	# hand = {'b':0, 'a':1, 'c':1, 'e':1}
+	# print update_hand(hand, 'ace') # getdisplay_hand(hand)
