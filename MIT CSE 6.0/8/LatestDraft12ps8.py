@@ -46,7 +46,7 @@ def printSubjects(subjects):
     the dictionary of subjects and total value and work of all subjects
     """
     totalVal, totalWork = 0, 0
-    if len(subjects) == 0:
+    if not len(subjects):
         return 'Empty SubjectList'
     res = 'Course\tValue\tWork\n======\t====\t=====\n'
     subNames = subjects.keys()
