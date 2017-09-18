@@ -31,7 +31,7 @@ def loadSubjects(filename):
 	inputFile = open(filename)
 	newDict = {}
 	for line in inputFile:
-		name,value,work = string.split(line.strip(),',')
+		name, value, work = string.split(line.strip(), ',')
 		newDict[name] = (int(value), int(work))
 	return newDict
 	# TODO: Instead of printing each line, modify the above to parse the name,
@@ -45,8 +45,8 @@ def printSubjects(subjects):
     Prints a string containing name, value, and work of each subject in
     the dictionary of subjects and total value and work of all subjects
     """
-    totalVal, totalWork = 0,0
-    if len(subjects) == 0:
+    totalVal, totalWork = 0, 0
+    if not len(subjects):
         return 'Empty SubjectList'
     res = 'Course\tValue\tWork\n======\t====\t=====\n'
     subNames = subjects.keys()
@@ -112,18 +112,23 @@ def greedyAdvisor(subjects, maxWork, comparator):
 		#print 'CmpValue'
 		maxValue = 0
 		for i in subjects.keys():
-			firstValue, firstWork, countS, tmp = subjects[i][VALUE], subjects[i][WORK], 0, (0,0)
+			firstValue, firstWork, countS, tmp = subjects[i][VALUE], \
+													subjects[i][WORK], 0, (0,0)
 			#print 'i ', i , 'firstValue ', firstValue, 'firstWork ', firstWork
 			work -= firstWork
 			for j in subjects.keys():
 				#print 'j ', j
-				if countS > count and subjects[j][WORK] <= work:# and countS >= 1:
-					#print 'countS ', countS, ' count ', count, 'maxValue', maxValue
+				if countS > count and subjects[j][WORK] <= work:
+					# and countS >= 1:
+					#print 'countS ', countS, ' count ', count,
+					#print 'maxValue', maxValue
 					#print subjects[j], tmp
 					#print 'firstValue + tmp[VALUE] ', firstValue+tmp[VALUE]
 					#print 'firstValue ', firstValue, 'tmp[VALUE] ', tmp[VALUE]
-					if cmpValue(subjects[j], tmp) and firstValue+tmp[VALUE] > maxValue:
-						maxValue, firstName, secondName, tmp = firstValue+tmp[VALUE], i, j, subjects[j]
+					if cmpValue(subjects[j], tmp) and \
+						firstValue + tmp[VALUE] > maxValue:
+						maxValue, firstName, secondName, tmp = \
+							firstValue + tmp[VALUE], i, j, subjects[j]
 				countS += 1
 			work = maxWork
 			count += 1
@@ -131,41 +136,52 @@ def greedyAdvisor(subjects, maxWork, comparator):
 		#print 'CmpWork'
 		minWork= sys.maxint
 		for i in subjects.keys():
-			firstValue, firstWork, countS = subjects[i][VALUE], subjects[i][WORK], 0
-			tmp = (sys.maxint,sys.maxint)
+			firstValue, firstWork, countS = subjects[i][VALUE], \
+											subjects[i][WORK], 0
+			tmp = (sys.maxint, sys.maxint)
 			work -= firstWork
 			for j in subjects.keys():
-				#print 'CountS, count, work, subjects[j][WORK]', countS, count, work, subjects[j][WORK] 
+				#print 'CountS, count, work, subjects[j][WORK]', countS,\
+				# count, work, subjects[j][WORK]
 				if countS > count and subjects[j][WORK] <= work:
-					if cmpWork(subjects[j], tmp ):
+					if cmpWork(subjects[j], tmp):
 						if tmp[WORK] != sys.maxint:
 							if firstWork + tmp[WORK] <= minWork:
-								minWork, firstName, secondName, tmp = firstWork+tmp[WORK], i, j, subjects[j]
+								minWork, firstName, secondName, tmp = \
+								firstWork + tmp[WORK], i, j, subjects[j]
 						else:		
-							tmp, firstName, secondName, minWork = subjects[j], i, j, firstWork+tmp[WORK]
+							tmp, firstName, secondName, minWork = subjects[j], \
+													i, j, firstWork+tmp[WORK]
 				countS += 1
 			work = maxWork
 			count += 1
 	elif comparator == cmpRatio:
 		#print '\nCmpRatio\n'
-		maxRatio= 0
+		maxRatio = 0
 		for i in subjects.keys():
 			#print 'i ', i
-			firstValue, firstWork, countS, tmp = subjects[i][VALUE], subjects[i][WORK], 0, (0,-1)
-			#print 'i ', i , 'firstValue ', firstValue, 'firstWork ', firstWork			
+			firstValue, firstWork, countS, tmp = subjects[i][VALUE], \
+										subjects[i][WORK], 0, (0,-1)
+			#print 'i ', i , 'firstValue ', firstValue, 'firstWork ', firstWork
 			work -= firstWork
 			for j in subjects.keys():
-				#print 'j ',j,' work', work, 'subjects[j][WORK] ',subjects[j][WORK]
+				#print 'j ',j,' work', work, 'subjects[j][WORK] ',\
+				#subjects[j][WORK]
 				#print 'countS ', countS, ' count ' , count 
 				if countS > count and subjects[j][WORK] <= work:
 					#print 'tmp ', tmp#print 'i , j, tmp ', i , j, tmp
 					if cmpRatio(subjects[j], tmp):
 						if tmp[WORK] > 0:
 							#print 'maxRatio ', maxRatio
-							#print 'firstvalue ',firstValue, 'firstWork ', firstWork, 'float(firstValue)/firstWork ', float(firstValue)/firstWork
-							#print 'tmp        ',tmp[VALUE], tmp[WORK], float(tmp[VALUE])/tmp[WORK]
-							if float(firstValue)/firstWork + float(subjects[j][VALUE])/subjects[j][WORK] > maxRatio:
-								maxRatio = float(firstValue)/firstWork + float(subjects[j][VALUE])/subjects[j][WORK]
+							#print 'firstvalue ',firstValue, 'firstWork ', \
+							#firstWork, 'float(firstValue)/firstWork ', \
+							#float(firstValue)/firstWork
+							#print 'tmp        ',tmp[VALUE], tmp[WORK], \
+							#float(tmp[VALUE])/tmp[WORK]
+							if float(firstValue)/firstWork + \
+								float(subjects[j][VALUE])/subjects[j][WORK] > maxRatio:
+								maxRatio = float(firstValue)/firstWork + \
+											float(subjects[j][VALUE])/subjects[j][WORK]
 								tmp, firstName, secondName = subjects[j], i, j
 								#print ' Actual i , j ' , i , j
 						else:
@@ -173,7 +189,8 @@ def greedyAdvisor(subjects, maxWork, comparator):
 							tmp = subjects[j]							
 							if firstName == None:
 								firstName, secondName = i, j
-								maxRatio = float(firstValue)/firstWork + float(tmp[VALUE])/tmp[WORK]
+								maxRatio = float(firstValue)/firstWork + \
+											float(tmp[VALUE])/tmp[WORK]
 				countS += 1
 			work = maxWork
 			count += 1
@@ -194,8 +211,8 @@ def bruteForceAdvisor(subjects, maxWork):
     """
     nameList = subjects.keys()
     tupleList = subjects.values()
-    bestSubset, bestSubsetValue = \
-            bruteForceAdvisorHelper(tupleList, maxWork, 0, None, None, [], 0, 0)
+    bestSubset, bestSubsetValue = bruteForceAdvisorHelper(tupleList, maxWork, \
+                                  0, None, None, [], 0, 0)
     outputSubjects = {}
     for i in bestSubset:
         outputSubjects[nameList[i]] = tupleList[i]
@@ -221,7 +238,7 @@ def bruteForceAdvisorHelper(subjects, maxWork, i, bestSubset, bestSubsetValue,
                     subsetValue + s[VALUE], subsetWork + s[WORK])
             subset.pop()
         bestSubset, bestSubsetValue = bruteForceAdvisorHelper(subjects,
-                maxWork, i+1, bestSubset, bestSubsetValue, subset,
+                maxWork, i + 1, bestSubset, bestSubsetValue, subset,
                 subsetValue, subsetWork)
         return bestSubset, bestSubsetValue
 
@@ -240,7 +257,7 @@ def bruteForceTime():
 		start_time = time.time()
 		print bruteForceAdvisor(newDictionary, i)
 		end_time = time.time()
-		print end_time-start_time
+		print end_time - start_time
 
 # Problem 3 Observations
 # ======================
@@ -273,17 +290,18 @@ def dpAdvisor(subjects, maxWork):
 			if len(subjects) - index > 1:
 				#print 'Entered \n'
 				diff = maxWork - subjects[i][WORK]
-				dpAdvisorHelper([i], li[index+1:], diff, subjects )
+				dpAdvisorHelper([i], li[index + 1:], diff, subjects)
 		index += 1
-	max = -1
+	max_subject_value = -1
 	subjectSet = []
 	index = 0
 	if len(res) >0:
 		for i in res.keys():
-			"""if  i == ('6.00','7.16','7.17') or i == ('6.00','7.16') or i == ('6.00','7.17') or i == ('7.16', '7.17'):
+			"""if  i == ('6.00','7.16','7.17') or i == ('6.00','7.16') 
+			or i == ('6.00','7.17') or i == ('7.16', '7.17'):
 				print 'i ', i, ' res[i] ', res[i], ' * ',"""
-			if res[i] > max:
-				max = res[i]
+			if res[i] > max_subject_value:
+				max_subject_value = res[i]
 				index = i
 		if type(index) != tuple:
 			subjectSet.append(index)
@@ -308,8 +326,9 @@ def dpAdvisorHelper( subSet, newList, newMaxWork, subjects ):
 			res[tuple([subject])] = subjects[subject][VALUE]
 			tempSubset = subSet[:]
 			tempSubset.append(subject)
-			#if tempSubset == ['7.16','7.17','6.00']:
-				#print 'True or False ',res.__contains__(tuple(sorted(tempSubset)))
+			#if tempSubset == ['7.16', '7.17', '6.00']:
+				#print 'True or False ', \
+				#res.__contains__(tuple(sorted(tempSubset)))
 			if not res.__contains__(tuple(sorted(tempSubset))):
 				#lastSubject = subSet[len(subSet)-1]
 				#print 'lastSubject ', lastSubject				
@@ -350,11 +369,11 @@ def dpTime():
 			end_time = time.time()
 			print end_time-start_time
 
-smallCatalog = {'6.00': (16, 8), '1.00':(7,7),'6.01':(5,3),'15.01':(9,6)}
+smallCatalog = {'6.00': (16, 8), '1.00': (7,7), '6.01': (5,3), '15.01': (9,6)}
 #smallCatalog = {'6.00':(4,4), '1.00':(2,2), '6.01':(3,3), '15.01':(1,1)}
 #smallCatalog = {'6.00':(1,1), '1.00':(2,2), '6.01':(3,3), '15.01':(4,4)}
 #print greedyAdvisor(smallCatalog, 15, cmpValue)
-#l = [ cmpValue, cmpWork, cmpRatio ]
+#l = [cmpValue, cmpWork, cmpRatio]
 #for i in l:
 	#print greedyAdvisor(smallCatalog, 15, i)#cmpWork)#cmpValue)
 
@@ -379,7 +398,7 @@ for i in range(31):#(6):#(2,3):#6):#31):
 	"""
 	print '******************************** '
 	print ' D  P maxWork ', i+1
-	selected = dpAdvisor(newDict, i+1)#15)
+	selected = dpAdvisor(newDict, i + 1)#15)
 	printSubjects(selected)
 	res = {}
 
