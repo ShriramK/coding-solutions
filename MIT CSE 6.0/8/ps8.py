@@ -113,7 +113,7 @@ def greedyAdvisor(subjects, maxWork, comparator):
 		maxValue = 0
 		for i in subjects.keys():
 			firstValue, firstWork, countS, tmp = subjects[i][VALUE], \
-													subjects[i][WORK], 0, (0,0)
+													subjects[i][WORK], 0, (0, 0)
 			#print 'i ', i , 'firstValue ', firstValue, 'firstWork ', firstWork
 			work -= firstWork
 			for j in subjects.keys():

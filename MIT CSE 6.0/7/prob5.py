@@ -28,7 +28,7 @@ def rev(s):
 		s[i] = s[-(i+1)]
 		s[-(i+1)] = tmp
 	print s
-s = [1,2,3]
-print s,type(s)
+s = [1, 2, 3]
+print s, type(s)
 rev(s)
 print s

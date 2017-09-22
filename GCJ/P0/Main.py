@@ -9,7 +9,7 @@ def translate_googlerese_text():
 	list_of_chars.extend(['p','d','r','j','g','t','h','a','q'])
 	case_num = 0
 	for line in input_file:
-		output_file.write("Case #%s: " % (case_num + 1))
+		output_file.write("Case #%s: " % (case_num+1))
 		for ch in line:
 			if ch.isalpha(): # check encoding
 				output_file.write(chr(list_of_chars.index(ch) + ord('a')))

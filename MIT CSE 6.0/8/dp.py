@@ -1,6 +1,6 @@
 res = []
 def msum(a):
-    return max([(sum(a[j:i]), (j, i)) for i in range(1, len(a) + 1) \
+    return max([(sum(a[j : i]), (j, i)) for i in range(1, len(a) + 1) \
                for j in range(i)])
 """
 def msum(a):

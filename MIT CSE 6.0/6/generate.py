@@ -2,10 +2,10 @@ def choose_iter(elements, length):
     new_len = length - 1
     for i in xrange(len(elements)):
         if length == 1:
-            yield (elements[i], )
+            yield (elements[i],)
         else:
             for next in choose_iter(elements[i + 1: len(elements)], new_len):
-                yield (elements[i], ) + next
+                yield (elements[i],) + next
 
 def choose(l, k):
     return list(choose_iter(l, k))

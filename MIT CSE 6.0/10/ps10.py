@@ -27,7 +27,7 @@ def getFrequencyDict(sequence):
     """
     freq = {}
     for x in sequence:
-        freq[x] = freq.get(x,0) + 1
+        freq[x] = freq.get(x, 0) + 1
     return freq
 
 def getWordScore(word):
@@ -49,23 +49,23 @@ def get_words_to_points(word_list):
 	""" 
 	Return a dict that maps every word in word_list to its point value.
 	"""
-	dict = {}
+	words_scores = {}
 	for word in word_list:
 		score = 0
 		for letter in word:
 			score += SCRABBLE_LETTER_VALUES[letter]
-		dict[word] = score
-		#print word,' ',dict[word]
-	#print 'dict', type(dict)
-	#print 'word', type(word)
-	return dict
+		words_scores[word] = score
+		# print word, ' ', words_scores[word]
+	# print 'words_scores', type(words_scores)
+	# print 'word', type(word)
+	return words_scores
 
 #
 # Problem 2: Representing a Hand
 #
 
 class Hand(object):
-	def __init__(self, handSize, initialHandDict = None):
+	def __init__(self, handSize, initialHandDict=None):
 		"""
 		Initialize a hand.
 
@@ -77,13 +77,14 @@ class Hand(object):
 		if initialHandDict is None:
 			initialHandDict = {}
 			for i in range(num_vowels):
-				x = VOWELS[random.randrange(0,len(VOWELS))]
+				x = VOWELS[random.randrange(0, len(VOWELS))]
 				initialHandDict[x] = initialHandDict.get(x, 0) + 1
 			for i in range(num_vowels, handSize):
-				x = CONSONANTS[random.randrange(0,len(CONSONANTS))]
+				x = CONSONANTS[random.randrange(0, len(CONSONANTS))]
 				initialHandDict[x] = initialHandDict.get(x, 0) + 1
 		self.initialSize = handSize
 		self.handDict = initialHandDict
+
 	def update(self, word):
 		"""
 		Remove letters in word from this hand.

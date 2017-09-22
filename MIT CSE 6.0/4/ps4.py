@@ -19,21 +19,21 @@ def nestEggFixed(salary, save, growthRate, years):
 	- return: a list whose values are the size of your retirement account at
 	  the end of each year.
 	"""
-	newList =[]
+	newList = []
 	for i in range(years):
 		newList.append(0)
 	for i in range(years):
-		if i == 0:
-			newList[0] = salary*save*0.01
+		if not i:
+			newList[0] = salary * save * 0.01
 		else:
-			newList[i] = newList[i-1]*(1+0.01*growthRate)+salary*save*0.01
+			newList[i] = newList[i-1]*(1+0.01*growthRate) + salary*save*0.01
 	return newList
 
 def testNestEggFixed():
-    salary     = 10000
-    save       = 10
+    salary = 10000
+    save = 10
     growthRate = 15
-    years      = 5
+    years = 5
     savingsRecord = nestEggFixed(salary, save, growthRate, years)
     print savingsRecord
     # Output should have values close to:
@@ -60,16 +60,16 @@ def nestEggVariable(salary, save, growthRates):
 		newList.append(0)
 	cnt = 0
 	for i in growthRates:
-		if cnt == 0:
-			newList[0] = salary*save*0.01
+		if not cnt:
+			newList[0] = salary * save * 0.01
 		else:
-			newList[cnt] = newList[cnt-1]*(1+0.01*i)+salary*save*0.01
+			newList[cnt] = newList[cnt-1]*(1+0.01*i) + salary*save*0.01
 		cnt += 1
 	return newList	
 
 def testNestEggVariable():
-    salary      = 10000
-    save        = 10
+    salary = 10000
+    save = 10
     growthRates = [3, 4, 5, 0, 3]
     savingsRecord = nestEggVariable(salary, save, growthRates)
     print savingsRecord
@@ -97,17 +97,17 @@ def postRetirement(savings, growthRates, expenses):
 		newList.append(0)
 	cnt = 0
 	for i in growthRates:
-		if cnt == 0:
-			newList[0] = savings*(1+0.01*i)-expenses;
+		if not cnt:
+			newList[0] = savings*(1+0.01*i) - expenses
 		else:
-			newList[cnt] = newList[cnt-1]*(1+0.01*i)-expenses;
+			newList[cnt] = newList[cnt-1]*(1+0.01*i) - expenses
 		cnt += 1
 	return newList
 
 def testPostRetirement():
-    savings     = 100000
+    savings = 100000
     growthRates = [10, 5, 0, 5, 1]
-    expenses    = 30000
+    expenses = 30000
     savingsRecord = postRetirement(savings, growthRates, expenses)
     print savingsRecord
     # Output should have values close to:
@@ -120,19 +120,21 @@ def testPostRetirement():
 # Problem 4
 #
 
-def recurseFunc( low, high, postRetireGrowthRates, savings, epsilon ):
-	expenses = (low+high)/2
-	print 'low ',low,' high ', high,' expenses ', expenses	
+def recurseFunc(low, high, postRetireGrowthRates, savings, epsilon):
+	expenses = (low+high) / 2
+	print 'low ', low, ' high ', high, ' expenses ', expenses	
 	print 'Current estimate of expenses ', expenses
 	rem = postRetirement(savings, postRetireGrowthRates, expenses )
-	print 'Rem ', rem[len(rem)-1]
-	val = rem[len(rem)-1]
-	if( abs(val) >= 0 and abs(val) < epsilon ):
+	print 'Rem ', rem[len(rem) - 1]
+	val = rem[len(rem) - 1]
+	if abs(val) >= 0 and abs(val) < epsilon:
 		return expenses
-	elif( val < 0 ):
-		expenses = recurseFunc( low, expenses, postRetireGrowthRates, savings, epsilon)
-	elif( val >= epsilon ):
-		expenses = recurseFunc( expenses, high, postRetireGrowthRates, savings, epsilon )
+	elif val < 0:
+		expenses = recurseFunc(low, expenses, postRetireGrowthRates, savings, \
+								epsilon)
+	elif val >= epsilon:
+		expenses = recurseFunc(expenses, high, postRetireGrowthRates, \
+								savings, epsilon)
 	return expenses
 
 def findMaxExpenses(salary, save, preRetireGrowthRates, postRetireGrowthRates,
@@ -150,18 +152,18 @@ def findMaxExpenses(salary, save, preRetireGrowthRates, postRetireGrowthRates,
 	"""
     # TODO: Your code here.
 	preRetSav = nestEggVariable(salary, save, preRetireGrowthRates)
-	savings = preRetSav[len(preRetSav)-1]
-	#print 'Savings + epsilon ', savings+epsilon
+	savings = preRetSav[len(preRetSav) - 1]
+	# print 'Savings + epsilon ', savings+epsilon
 	val = savings + epsilon + 1
-	answer = recurseFunc( 0, val, postRetireGrowthRates, savings, epsilon )
+	answer = recurseFunc(0, val, postRetireGrowthRates, savings, epsilon)
 	return answer
 
 def testFindMaxExpenses():
-    salary                = 10000
-    save                  = 10
-    preRetireGrowthRates  = [3, 4, 5, 0, 3]
+    salary = 10000
+    save = 10
+    preRetireGrowthRates = [3, 4, 5, 0, 3]
     postRetireGrowthRates = [10, 5, 0, 5, 1]
-    epsilon               = .01
+    epsilon = .01
     expenses = findMaxExpenses(salary, save, preRetireGrowthRates,
                                postRetireGrowthRates, epsilon)
     print expenses

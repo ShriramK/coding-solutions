@@ -5,7 +5,7 @@ def compute_prime(prime_num):
 	# print "Value of cnt " + str(cnt)
 	while val <= prime_num:
 		for i in range(val / 2):
-			if val % (i + 2) != 0:
+			if val % (i+2) != 0:
 				if i + 1 == val / 2:
 					print "Logarithm value of the prime " + str(val)
 					print str(log(val))

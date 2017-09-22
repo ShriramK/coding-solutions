@@ -70,14 +70,17 @@ def ghost():
 				break
 		fragment += letter
 		print 'Current word fragment: ', fragment
-		if not is_fragment_valid(fragment):#con == False: #word doesn't exist Current player loses
-			print 'Player ',player,' loses because no word begins with ', fragment,'!'
-			print 'Player ',opponent,' wins!'
+		if not is_fragment_valid(fragment): # con == False: 
+			#word doesn't exist Current player loses
+			print 'Player ', player, ' loses because no word begins with ',
+			print fragment,'!'
+			print 'Player ', opponent, ' wins!'
 			break
 		else:
 			if is_fragment_word(fragment):
-				print 'Player ',player,' loses because '"'",fragment,"'"' is a word!'
-				print 'Player ',opponent,' wins!'
+				print 'Player ', player, ' loses because '"'", fragment,
+				print "'"' is a word!'
+				print 'Player ', opponent, ' wins!'
 				break
 			#switch player
 			if player == 2:
@@ -86,27 +89,28 @@ def ghost():
 			else:
 				player = 2
 				opponent = 1
-			print "Player ",player,"'s turn"
+			print "Player ", player, "'s turn"
 			letter = string.lower(raw_input())			
-			print 'Player ',player,' says letter: ',letter
+			print 'Player ', player, ' says letter: ', letter
 
 def is_fragment_valid(fragment):
-	size = len(fragment)
+	fragment_size = len(fragment)
 	for word in wordlist:
-		if size <= len(word):
-			for i in range(size):
+		if fragment_size <= len(word):
+			for i in range(fragment_size):
 				if fragment[i] == word[i]:
-					if i == size-1:
+					if i == fragment_size - 1:
 						return True
 				else:
-					break#no such word exists
+					break# no such word exists
 	return False
+
 def is_fragment_word(fragment):
 	for i in wordlist:
 		if fragment == i:
 			if len(fragment) > 3:
 				return True
-	return False	
+	return False
 		
 if __name__ == '__main__':
 	print 'Welcome to Ghost!'

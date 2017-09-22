@@ -5,7 +5,7 @@ def compute_thousandth_prime():
 		# print "Value of cnt "+ str(cnt)
 		for i in range(thousandth_prime_num / 2):
 			# print i
-			if thousandth_prime_num % (i + 2) != 0:
+			if thousandth_prime_num % (i+2) != 0:
 				if i + 1 == thousandth_prime_num / 2:
 					cnt += 1
 					i = thousandth_prime_num + 1

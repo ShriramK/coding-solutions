@@ -19,7 +19,7 @@ else:
 		first_fib_str = temp
 		cnt += 1
 print 'str ', second_fib_str
-val = 1000000007 * (10 ** 9 + 7)
+val = 1000000007 * (10**9+7)
 
 num_of_queries = int(input_params[1])
 for i in range(num_of_queries):
@@ -36,7 +36,7 @@ for i in range(num_of_queries):
 		# for j in range(0, len(second_fib_str) - len(test_str) + 1):
 			# if second_fib_str[j:j + 1] == test_str[:1] and \
 			# second_fib_str[j:len(test_str) + j] == test_str:
-			if second_fib_str[j:len(test_str) + j] == test_str:
+			if second_fib_str[j : len(test_str) + j] == test_str:
 				count += 1
 				count %= val
         print count

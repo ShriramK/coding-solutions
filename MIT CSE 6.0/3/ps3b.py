@@ -12,10 +12,11 @@ def subStringMatchExact(target, key):
 	index = find(target, key)
 	temp = 0
 	while index != -1:
-		dlist.append(temp+index)
-		temp = temp+index+1
+		dlist.append(temp + index)
+		temp = temp + index + 1
 		index = find(target[temp:], key)
 	return tuple(dlist)
+
 """
 def subStringMatchExactRecursive(target, key):
 	#dlist = ()
@@ -34,11 +35,12 @@ def subStringMatchExactRecursive(target, key):
 		dlist = []
 	return tuple(dlist)
 """
+
 def subStringMatchExactRecursive(target, key):
 	index = find(target, key)
 	if index != -1:
-		dlist = [len(target1)-len(target)+index]
-		dlist += subStringMatchExactRecursive(target[index+1:], key)
+		dlist = [len(target1) - len(target) + index]
+		dlist += subStringMatchExactRecursive(target[index + 1:], key)
 		print 'dlist',dlist
 	else:
 		dlist = []
@@ -69,9 +71,10 @@ def subStringMatchExactRecursive(target, key):
 		dlist = tuple()
 	return dlist
 """
+
 if __name__ == '__main__':
 	print 'iterative',subStringMatchExact(target1, key10)
-	#print 'recursive',subStringMatchExactRecursive(target1, key10)
-	#print 'recursive',subStringMatchExactRecursive(target3, key10)
+	# print 'recursive',subStringMatchExactRecursive(target1, key10)
+	# print 'recursive',subStringMatchExactRecursive(target3, key10)
 	print subStringMatchExactRecursive('abcd','e')
 

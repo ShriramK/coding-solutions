@@ -1,3 +1,7 @@
+import sys
+
+list_of_words = []
+
 def generate_permutations(num_of_chars=4):
 	# modify if in need!
 	allowed_chars = ['a', 'b', 'c', 'd', 'e']
@@ -21,9 +25,6 @@ def generate_permutations(num_of_chars=4):
 		break
 	return rows
 
-import sys
-
-list_of_words = []
 for i in range(3):
 	print len(generate_permutations(i))
 	print 'list before every step ', list_of_words

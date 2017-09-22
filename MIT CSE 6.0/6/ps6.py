@@ -425,7 +425,7 @@ def get_words_to_points(word_list):
 		for letter in word:
 			score += SCRABBLE_LETTER_VALUES[letter]
 		word_point_value[word] = score
-		# print word,' ', word_point_value[word]
+		# print word, ' ', word_point_value[word]
 	# print 'word_point_value ', type(word_point_value)
 	# print 'word ', type(word)
 	return word_point_value

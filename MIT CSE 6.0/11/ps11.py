@@ -90,7 +90,7 @@ class RectangularRoom(object):
 		#print 'cleanTileAtPosition ',
 		#print 'pos.getX() ', pos.getX(),
 		#print 'pos.getY() ', pos.getY()
-		self.tileArray[int(pos.getX())-1][int(pos.getY())-1] = 0
+		self.tileArray[int(pos.getX()) - 1][int(pos.getY()) - 1] = 0
 		self.cleaned += 1
 
 	def isTileCleaned(self, m, n):
@@ -103,7 +103,7 @@ class RectangularRoom(object):
 		n: an integer
 		returns: True if (m, n) is cleaned, False otherwise
 		"""
-		return self.tileArray[int(m)][int(n)] == 0#pos.getX()][pos.getY()] == 0
+		return self.tileArray[int(m)][int(n)] == 0# pos.getX()][pos.getY()] == 0
 
 	def getNumTiles(self):
 		"""
@@ -127,7 +127,8 @@ class RectangularRoom(object):
 
 		returns: a Position object.
 		"""
-		return Position(random.randrange(0,self.width), random.randrange(0,self.height))
+		return Position(random.randrange(0, self.width), \
+						random.randrange(0, self.height))
 	def isPositionInRoom(self, pos):
 		"""
 		Return True if POS is inside the room.
@@ -137,7 +138,8 @@ class RectangularRoom(object):
 		"""
 		xCoord = pos.getX()
 		yCoord = pos.getY()
-		return xCoord >= 0 and xCoord < self.width and yCoord >= 0 and yCoord < self.height
+		return xCoord >= 0 and xCoord < self.width and yCoord >= 0 and \
+				yCoord < self.height
 
 class BaseRobot(object):
     """
@@ -168,9 +170,10 @@ class BaseRobot(object):
 		self.speed = speed
 		self.d = random.randrange(0, 360)
 		self.p = room.getRandomPosition()
-		#self.p = position
-		positionObj = Position(random.randrange(0, self.room.width), random.randrange(0, self.room.height))
-		self.p = positionObj#self.room.getRandomPosition() gives a NoneType error
+		# self.p = position
+		positionObj = Position(random.randrange(0, self.room.width), \
+								random.randrange(0, self.room.height))
+		self.p = positionObj# self.room.getRandomPosition() gives a NoneType error
 
     def getRobotPosition(self):
 		"""
@@ -223,41 +226,45 @@ class Robot(BaseRobot):
 		oldPosition = self.p
 		print 'self.d ', self.d,' self.speed ', self.speed
 		newPosition = oldPosition.getNewPosition(self.d, self.speed)
-		newDirection = self.d#None#random.randrange(0, 360)#-1
+		newDirection = self.d# None#random.randrange(0, 360)#-1
 		triedDirections = []
-		triedDirections.append(self.d)#newDirection)
-		#check if position in room 
-			#if in room
-				#check if tile is not already cleaned
-					#if not cleaned
-						#break
-					#else
-						#getNewPosition
-			#else 
-				#getNewPosition
+		triedDirections.append(self.d)# newDirection)
+		# check if position in room 
+			# if in room
+				# check if tile is not already cleaned
+					# if not cleaned
+						# break
+					# else
+						# getNewPosition
+			# else 
+				# getNewPosition
 		
 		while True:
 			if self.room.isPositionInRoom(newPosition):
-				#print 'In Room '
-				if self.room.isTileCleaned(newPosition.getX(), newPosition.getY()):
-					#print 'Is Cleaned'
+				# print 'In Room '
+				if self.room.isTileCleaned(newPosition.getX(), \
+											newPosition.getY()):
+					# print 'Is Cleaned'
 					newDirection = retrieveNewDirection(triedDirections)
-					newPosition = oldPosition.getNewPosition(newDirection, self.speed)
+					newPosition = oldPosition.getNewPosition(newDirection, \
+															self.speed)
 				else:
-					#print 'Is not Cleaned'
+					# print 'Is not Cleaned'
 					break
 			else:
-				#print 'Is not in Room'
+				# print 'Is not in Room'
 				newDirection = retrieveNewDirection(triedDirections)
-				newPosition = oldPosition.getNewPosition(newDirection, self.speed)
-			#print 'numCleaned' , self.room.getNumCleanedTiles(), 'size of triedDirection ', len(triedDirections)
+				newPosition = oldPosition.getNewPosition(newDirection, \
+															self.speed)
+			# print 'numCleaned' , self.room.getNumCleanedTiles(),
+			# print 'size of triedDirection ', len(triedDirections)
 				
 		self.setRobotPosition(newPosition)
 		self.setRobotDirection(newDirection)			
 		self.room.cleanTileAtPosition(newPosition)
 
 def retrieveNewDirection(triedDirections):
-	#print 'triedDirections ', triedDirections
+	# print 'triedDirections ', triedDirections
 	newDirection = None
 	while True:
 		newDirection = random.randrange(0, 360)
@@ -297,20 +304,20 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
 	# TODO: Your code goes here
 	visualize = False
 	totalAns = []
-	totalTiles = width*height
+	totalTiles = width * height
 	rRoom = RectangularRoom(width, height)	
-	for robotObj in range(1,num_robots):
+	for robotObj in range(1, num_robots):
 		robotObject = robot_type(rRoom, speed)
 		ans = []
-		for index in range(1,num_trials):
+		for index in range(1, num_trials):
 			subAns = []
 			val = 0.0
 			timeSteps = 0
 			while val <= min_coverage:
 				if val >= 0.8:
 					print '*ASASDOSJDSAJSAJfjdfsjdlfjdslkgjdslkgjdslfdsfl'
-				val += float(1)/totalTiles
-				print 'val ' , val, 'min_coverage ', min_coverage
+				val += float(1) / totalTiles
+				print 'val ', val, 'min_coverage ', min_coverage
 				subAns.append(val)
 				robotObject.updatePositionAndClean()
 				timeSteps += 1
@@ -318,9 +325,9 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
 		totalAns.append(ans)
 	return totalAns
 
-#create Robot object
-rRoom = RectangularRoom(20, 20)#width, height)
-#robotObj = Robot(rRoom, 20)	
+# create Robot object
+rRoom = RectangularRoom(20, 20)# width, height)
+# robotObj = Robot(rRoom, 20)	
 avg = runSimulation(2, 1.0, 15, 20, 0.8, 5, Robot, False);
 
 # === Provided function
@@ -339,7 +346,7 @@ def computeMeans(list_of_lists):
         if len(lst) > longest:
            longest = len(lst)
     # Get totals
-    tots = [0]*(longest)
+    tots = [0] * (longest)
     for lst in list_of_lists:
         for i in range(longest):
             if i < len(lst):
@@ -349,7 +356,7 @@ def computeMeans(list_of_lists):
     # Convert tots to an array to make averaging across each index easier
     tots = pylab.array(tots)
     # Compute means
-    means = tots/float(len(list_of_lists))
+    means = tots / float(len(list_of_lists))
     return means
 
 

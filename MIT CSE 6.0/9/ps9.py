@@ -45,7 +45,7 @@ class Circle(Shape):
         """
         Returns approximate area of the circle
         """
-        return 3.14159 * (self.radius ** 2)
+        return 3.14159 * (self.radius**2)
 
     def __str__(self):
         return 'Circle with radius ' + str(self.radius)
@@ -73,7 +73,7 @@ class Triangle(Shape):
 		"""
 		Returns approximate area of the triangle
 		"""
-		return pow(3, .5) / 2 * self.height * self.base# x ** .5
+		return pow(3, .5) / 2*self.height*self.base# x ** .5
 
 	def __str__(self):
 		return 'Triangle with base ' + str(self.base) + ' and ' + \

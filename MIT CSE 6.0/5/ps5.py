@@ -175,9 +175,9 @@ def is_valid_word(word, hand, word_list):
 	new_hand = hand.copy()
 	con = False
 	for i in word:
-		if hand.get(i, 0) != 0:# hand.get(i,0):
+		if hand.get(i, 0):# hand.get(i,0):
 			con = True
-			if new_hand.get(i,0) != 0:
+			if new_hand.get(i,0):
 				new_hand[i] -= 1
 			else:
 				return False
@@ -185,9 +185,9 @@ def is_valid_word(word, hand, word_list):
 			break
 	if not con:
 		return con
-	#for i in new_hand.keys():
-		#if new_hand[i] != 0:
-			#return False
+	# for i in new_hand.keys():
+		# if new_hand[i] != 0:
+			# return False
 	for i in word_list:
 		if word == i:
 			return True
@@ -240,7 +240,7 @@ def play_hand(hand, word_list):
 			# hand = update_hand(hand, word)
 			word_score = get_word_score(word, HAND_SIZE)
 			total += word_score
-			print word,' earned ', word_score, ' points.'
+			print word, ' earned ', word_score, ' points.'
 			print 'Total: ', total, ' points.'
 			print 'Hand ', hand
 			# check for unused letters
@@ -301,7 +301,7 @@ if __name__ == '__main__':
 	# print "Shriram testing it as per instructions in pdf"
 	# print get_word_score("shriram", 7)
 	# print get_word_score("aeio", 4)
-	word_list = load_words()	
+	word_list = load_words()
 	play_game(word_list)
-	# hand = {'b':0, 'a':1, 'c':1, 'e':1}
+	# hand = {'b': 0, 'a': 1, 'c': 1, 'e': 1}
 	# print update_hand(hand, 'ace') # getdisplay_hand(hand)
