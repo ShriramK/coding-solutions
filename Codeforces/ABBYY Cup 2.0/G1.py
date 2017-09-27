@@ -2,11 +2,13 @@
 Fibonacci Numbers
 '''
 
+import operator
+
 input_params = raw_input().split()
 
 first_fib_str = "a"
 second_fib_str = "b"
-fib_string_index = int(input_params[0])
+fib_string_index = int(operator.getitem(input_params, 0))
 if fib_string_index == 1:
 	second_fib_str = "a"
 elif fib_string_index == 2:
@@ -25,10 +27,11 @@ num_of_queries = int(input_params[1])
 for i in range(num_of_queries):
     test_str = raw_input()
     #print 'test_str ', test_str
-    first_char = test_str[0]
+    first_char = operator.getitem(test_str, 0)
     list_of_pos = []
     for pos in range(len(second_fib_str)):
-        if second_fib_str[pos] == first_char:
+    	fib_char = operator.getitem(second_fib_str, pos)
+        if fib_char == first_char:
             list_of_pos.append(pos)
     if test_str in second_fib_str:
         count = 0
