@@ -179,14 +179,16 @@ def greedyAdvisor(subjects, maxWork, comparator):
 							#print 'tmp        ',tmp[VALUE], tmp[WORK], \
 							#float(tmp[VALUE])/tmp[WORK]
 							if float(firstValue)/firstWork + \
-								float(subjects[j][VALUE])/subjects[j][WORK] > maxRatio:
+								float(subjects[j][VALUE])/subjects[j][WORK] \
+								> maxRatio:
 								maxRatio = float(firstValue)/firstWork + \
-											float(subjects[j][VALUE])/subjects[j][WORK]
+											float(subjects[j][VALUE])/\
+											subjects[j][WORK]
 								tmp, firstName, secondName = subjects[j], i, j
 								#print ' Actual i , j ' , i , j
 						else:
 							#print 'Initial i, j ' , i , j
-							tmp = subjects[j]							
+							tmp = subjects[j]
 							if firstName == None:
 								firstName, secondName = i, j
 								maxRatio = float(firstValue)/firstWork + \
@@ -343,7 +345,8 @@ def dpAdvisorHelper( subSet, newList, newMaxWork, subjects ):
 				else:
 				"""
 				#print 'subSet ', subSet, ' type ', type(subSet)
-				res[tS] = res[tuple(sorted(subSet))] + subjects[newList[i]][VALUE]
+				res[tS] = res[tuple(sorted(subSet))] + \
+							subjects[newList[i]][VALUE]
 				diff = newMaxWork - newWork
 				if len(newList) > 1 and diff > 0 :
 					dpAdvisorHelper(tempSubset, newList[i+1:], diff, subjects)
@@ -369,7 +372,12 @@ def dpTime():
 			end_time = time.time()
 			print end_time-start_time
 
-smallCatalog = {'6.00': (16, 8), '1.00': (7,7), '6.01': (5,3), '15.01': (9,6)}
+smallCatalog = {
+				'6.00': (16, 8),
+				'1.00': (7, 7),
+				'6.01': (5, 3),
+				'15.01': (9, 6)
+}
 #smallCatalog = {'6.00':(4,4), '1.00':(2,2), '6.01':(3,3), '15.01':(1,1)}
 #smallCatalog = {'6.00':(1,1), '1.00':(2,2), '6.01':(3,3), '15.01':(4,4)}
 #print greedyAdvisor(smallCatalog, 15, cmpValue)
@@ -397,7 +405,7 @@ for i in range(31):#(6):#(2,3):#6):#31):
 	printSubjects(selected1)
 	"""
 	print '******************************** '
-	print ' D  P maxWork ', i+1
+	print ' D  P maxWork ', i + 1
 	selected = dpAdvisor(newDict, i + 1)#15)
 	printSubjects(selected)
 	res = {}

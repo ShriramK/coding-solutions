@@ -1,3 +1,4 @@
+import operator
 from string import *
 
 # this is a code file that you can use as a template for submitting your
@@ -20,9 +21,10 @@ key13 = 'atgca'
 
 def constrainedMatchPair(firstMatch, secondMatch, length):
 	dlist = []
+	comp_length = length + 1
 	for i in firstMatch:
 		for j in secondMatch:
-			if i + length + 1 == j:
+			if i + comp_length == j:
 				print 'exact match', target1[i : j + 1]
 				dlist.append(i)
 	return tuple(dlist)
@@ -36,7 +38,7 @@ def subStringMatchExact(target, key):
 		index = -1
 	while index != -1:
 		dlist.append(temp + index)
-		temp = temp + index + 1
+		temp = reduce(operator.add, [temp, index, 1])
 		index = find(target[temp:], key)
 	return tuple(dlist)
 

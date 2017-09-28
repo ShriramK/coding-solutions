@@ -6,6 +6,7 @@
 #
 # Problem 1
 #
+import operator
 from string import *
 
 def nestEggFixed(salary, save, growthRate, years):
@@ -19,14 +20,15 @@ def nestEggFixed(salary, save, growthRate, years):
 	- return: a list whose values are the size of your retirement account at
 	  the end of each year.
 	"""
+	product_num = reduce(operator.mul, [salary, save, 0.01])
 	newList = []
 	for i in range(years):
 		newList.append(0)
 	for i in range(years):
 		if not i:
-			newList[0] = salary * save * 0.01
+			newList[0] = product_num
 		else:
-			newList[i] = newList[i-1]*(1+0.01*growthRate) + salary*save*0.01
+			newList[i] = newList[i-1]*(1+0.01*growthRate) + product_num
 	return newList
 
 def testNestEggFixed():
@@ -55,15 +57,16 @@ def nestEggVariable(salary, save, growthRates):
 	  account (integers between 0 and 100).
 	- return: a list of your retirement account value at the end of each year.
 	"""
+	product_num = reduce(operator.mul, [salary, save, 0.01])
 	newList =[]
 	for i in growthRates:
 		newList.append(0)
 	cnt = 0
 	for i in growthRates:
 		if not cnt:
-			newList[0] = salary * save * 0.01
+			newList[0] = product_num
 		else:
-			newList[cnt] = newList[cnt-1]*(1+0.01*i) + salary*save*0.01
+			newList[cnt] = newList[cnt-1]*(1+0.01*i) + product_num
 		cnt += 1
 	return newList	
 

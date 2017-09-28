@@ -4,8 +4,9 @@
 # Collaborators:
 # Time: 11:40 AM , 11/24/2011
 
-from string import *
+import operator
 import math
+from string import *
 
 class Shape(object):
     def area(self):
@@ -73,7 +74,8 @@ class Triangle(Shape):
 		"""
 		Returns approximate area of the triangle
 		"""
-		return pow(3, .5) / 2*self.height*self.base# x ** .5
+		area_operand = reduce(operator.mul, [2, self.height, self.base])
+		return pow(3, .5) / area_operand# x ** .5
 
 	def __str__(self):
 		return 'Triangle with base ' + str(self.base) + ' and ' + \
@@ -167,7 +169,7 @@ def readShapesFromFile(filename):
 	cnt = 0
 	for line in inputFile:
 		cnt += 1
-		data = split(line.strip(), ',')#string.split(line.strip(), ',')
+		data = split(line.strip(), ',')# string.split(line.strip(), ',')
 		if len(data) == 3:
 			obj.addShape(Triangle(data[1], data[2]))
 		elif len(data) == 2:

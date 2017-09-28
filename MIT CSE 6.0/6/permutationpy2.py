@@ -1,3 +1,4 @@
+import operator
 import sys
 
 list_of_words = []
@@ -5,11 +6,9 @@ list_of_words = []
 def generate_permutations(num_of_chars=4):
 	# modify if in need!
 	allowed_chars = ['a', 'b', 'c', 'd', 'e']
-	status = []
-	for each in range(num_of_chars):
-		status.append(0)
-	last_char = len(allowed_chars)
 	print 'len(allowed_chars)', len(allowed_chars)
+	last_char = len(allowed_chars)
+	status = operator.repeat([0], num_of_chars)
 	rows = []
 	for x in xrange(last_char ** num_of_chars):
 		rows.append("")

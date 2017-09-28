@@ -16,6 +16,7 @@ print subs
 # seq = {'a': 1, 'c': 1, 'f': 1, 'i': 1, 's': 1, 't': 1, 'x': 1}
 seq  = "acfistx"
 seq  = "abc"
+
 def powerset(seq):
 	if len(seq):
 		head = powerset(seq[:-1])

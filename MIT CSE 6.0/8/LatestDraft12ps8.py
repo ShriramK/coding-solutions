@@ -230,7 +230,7 @@ def dpAdvisorHelper( works, values, length, maxWork, listOfSubjects ):
 				else:
 					for subject in subResultOne[WORK]:
 						bestSubSet.append(subject)
-				res[length, maxWork] = [maxValue, bestSubSet]			
+				res[length, maxWork] = [maxValue, bestSubSet]
 		ret = res[length, maxWork]
 	return ret
 #

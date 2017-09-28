@@ -25,7 +25,7 @@ def constrainedMatchPair(firstMatch, secondMatch, length):
 	for i in firstMatch:
 		for j in secondMatch:
 			if i + length + 1 == j:
-				print 'exact match',target1[i : j+1]
+				print 'exact match', target1[i : j+1]
 				dlist.append(i)
 	return tuple(dlist)
 

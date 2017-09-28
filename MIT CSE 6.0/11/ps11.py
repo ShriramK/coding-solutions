@@ -342,11 +342,10 @@ def computeMeans(list_of_lists):
     """
     # Find length of longest list
     longest = 0
-    for lst in list_of_lists:
-        if len(lst) > longest:
-           longest = len(lst)
+    if list_of_lists:
+        longest = max([len(each_list) for each_list in list_of_lists])
     # Get totals
-    tots = [0] * (longest)
+    tots = [0] * longest
     for lst in list_of_lists:
         for i in range(longest):
             if i < len(lst):
