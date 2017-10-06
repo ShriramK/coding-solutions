@@ -1,4 +1,5 @@
 from string import *
+
 target1 = 'atgacatgcacaagtatgcat'
 target2 = 'atgaatgcatggatgtaaatgcag'
 key10 = 'a'

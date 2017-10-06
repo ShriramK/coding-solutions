@@ -5,8 +5,9 @@ def translate_googlerese_text():
 	num_of_lines = input_file.readline()
 	# li = ['y','h','e','s','o','c','v','x','d','u','i','g','l','b','k','r','z','t','n','w',
 	# 'j','p','f','m','a','q']
-	list_of_chars = ['y','n','f','i','c','w','l','b','k','u','o','m','x','s','e','v','z']
-	list_of_chars.extend(['p','d','r','j','g','t','h','a','q'])
+	list_of_chars = ['y', 'n', 'f', 'i', 'c', 'w', 'l', 'b', 'k', 'u', 'o', \
+					'm', 'x', 's', 'e', 'v', 'z']
+	list_of_chars.extend(['p', 'd', 'r', 'j', 'g', 't', 'h', 'a', 'q'])
 	case_num = 0
 	for line in input_file:
 		output_file.write("Case #%s: " % (case_num+1))

@@ -1,4 +1,5 @@
 from string import *
+
 target1 = 'atgacatgcacaagtatgcat'
 target2 = 'atgaatgcatggatgtaaatgcag'
 key10 = 'a'
@@ -39,7 +40,7 @@ def subStringMatchExactRecursive(target, key):
 def subStringMatchExactRecursive(target, key):
 	index = find(target, key)
 	if index != -1:
-		dlist = [len(target1) - len(target) + index]
+		dlist = [len(target1) - len(target)+index]
 		dlist += subStringMatchExactRecursive(target[index + 1:], key)
 		print 'dlist', dlist
 	else:

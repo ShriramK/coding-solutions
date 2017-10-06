@@ -4,7 +4,7 @@ def choose_iter(elements, length):
         if length == 1:
             yield (elements[i],)
         else:
-            for next in choose_iter(elements[i + 1: len(elements)], new_len):
+            for next in choose_iter(elements[i+1 : len(elements)], new_len):
                 yield (elements[i],) + next
 
 def choose(l, k):

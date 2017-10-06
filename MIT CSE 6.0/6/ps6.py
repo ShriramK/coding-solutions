@@ -455,7 +455,7 @@ if __name__ == '__main__':
 	points_dict = get_words_to_points(word_list)
 	time_limit = get_time_limit(points_dict, 1)
 	rearrange_dict = get_word_rearrangements(word_list)
-	hand_data = {'a': 2,'b': 2,'d': 1,'t': 1}
+	hand_data = {'a': 2, 'b': 2, 'd': 1, 't': 1}
 	# print 'Pick best word faster',
 	# print pick_best_word_faster(hand_data, rearrange_dict)
 	# print time_limit

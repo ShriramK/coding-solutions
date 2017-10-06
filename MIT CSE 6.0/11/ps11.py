@@ -4,6 +4,7 @@
 # Time: 6.30 PM, Dec'05 , 2011
 
 import math
+from operator import repeat
 import random 
 
 # === Provided classes
@@ -74,11 +75,8 @@ class RectangularRoom(object):
 		self.height = height
 		self.cleaned = 0
 		self.tileArray = []
-		for i in range(width):
-			subTileArray = []
-			for j in range(height):
-				subTileArray.append(-1)
-			self.tileArray.append(subTileArray)
+		self.tileArray = repeat([repeat([-1], height)], width)
+		# self.tileArray = [[-1] * height] * width
 
 	def cleanTileAtPosition(self, pos):
 		"""
