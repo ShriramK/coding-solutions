@@ -45,7 +45,7 @@ def getWordScore(word):
     return score
 
 def get_words_to_points(word_list):
-	""" 
+	"""
 	Return a dict that maps every word in word_list to its point value.
 	"""
 	words_scores = {}
@@ -106,7 +106,8 @@ class Hand(object):
 		newDict = getFrequencyDict(letters)
 		ans = True
 		for letter in letters:
-			if temp[letter] < newDict[letter]:	#if temp[letter] >= 1: temp[letter] -= 1
+			if temp[letter] < newDict[letter]:
+			# if temp[letter] >= 1: temp[letter] -= 1
 				ans = False
 				break
 		return ans
@@ -260,7 +261,7 @@ class ComputerPlayer(Player):
 				if freq[letter] > self.hand.handDict.get(letter, 0):
 					con = True
 					break
-			if con != True:
+			if not con:
 				if ans == '.' or points_dict[word] > points_dict[ans]:
 					ans = word
 		return ans
