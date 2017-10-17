@@ -177,7 +177,7 @@ def is_valid_word(word, hand, word_list):
 	for i in word:
 		if hand.get(i, 0):# hand.get(i,0):
 			con = True
-			if new_hand.get(i,0):
+			if new_hand.get(i, 0):
 				new_hand[i] -= 1
 			else:
 				return False

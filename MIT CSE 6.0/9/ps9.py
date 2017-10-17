@@ -166,9 +166,7 @@ def readShapesFromFile(filename):
 	"""
 	inputFile = open(filename)
 	obj = ShapeSet()
-	cnt = 0
-	for line in inputFile:
-		cnt += 1
+	for cnt, line in enumerate(inputFile):
 		data = split(line.strip(), ',')# string.split(line.strip(), ',')
 		if len(data) == 3:
 			obj.addShape(Triangle(data[1], data[2]))
