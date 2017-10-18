@@ -42,7 +42,7 @@ def get_frequency_dict(sequence):
     # freqs: dictionary (element_type -> int)
     freq = {}
     for x in sequence:
-        freq[x] = freq.get(x,0) + 1
+        freq[x] = freq.get(x, 0) + 1
     return freq
 
 
@@ -63,17 +63,17 @@ def ghost():
 	letter = string.lower(raw_input())
 	while True:
 		while True:
-			if not letter in string.ascii_letters:
+			if letter not in string.ascii_letters:
 				print 'Invalid letter. Please enter a valid letter'
 				letter = string.lower(raw_input())
 			else:
 				break
 		fragment += letter
 		print 'Current word fragment: ', fragment
-		if not is_fragment_valid(fragment): # con == False: 
-			#word doesn't exist Current player loses
+		if not is_fragment_valid(fragment):  # con == False: 
+			# word doesn't exist Current player loses
 			print 'Player ', player, ' loses because no word begins with ',
-			print fragment,'!'
+			print fragment, '!'
 			print 'Player ', opponent, ' wins!'
 			break
 		else:
@@ -82,7 +82,7 @@ def ghost():
 				print "'"' is a word!'
 				print 'Player ', opponent, ' wins!'
 				break
-			#switch player
+			# switch player
 			if player == 2:
 				player = 1
 				opponent = 2
@@ -93,6 +93,7 @@ def ghost():
 			letter = string.lower(raw_input())			
 			print 'Player ', player, ' says letter: ', letter
 
+
 def is_fragment_valid(fragment):
 	fragment_size = len(fragment)
 	for word in wordlist:
@@ -102,8 +103,9 @@ def is_fragment_valid(fragment):
 					if i == fragment_size - 1:
 						return True
 				else:
-					break# no such word exists
+					break  # no such word exists
 	return False
+
 
 def is_fragment_word(fragment):
 	for i in wordlist:
@@ -111,6 +113,7 @@ def is_fragment_word(fragment):
 			if len(fragment) > 3:
 				return True
 	return False
+
 		
 if __name__ == '__main__':
 	print 'Welcome to Ghost!'

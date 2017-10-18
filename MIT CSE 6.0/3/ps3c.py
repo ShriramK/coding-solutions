@@ -25,11 +25,11 @@ def constrainedMatchPair(firstMatch, secondMatch, length):
 	for i in firstMatch:
 		for j in secondMatch:
 			if i + comp_length == j:
-				print 'exact match', target1[i : j + 1]
+				print 'exact match', target1[i: j + 1]
 				dlist.append(i)
 	return tuple(dlist)
 
-### the following procedure you will use in Problem 3
+## the following procedure you will use in Problem 3
 def subStringMatchExact(target, key):
 	dlist = []
 	index = find(target, key)

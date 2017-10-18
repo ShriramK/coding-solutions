@@ -75,7 +75,7 @@ class Triangle(Shape):
 		Returns approximate area of the triangle
 		"""
 		area_operand = reduce(operator.mul, [2, self.height, self.base])
-		return pow(3, .5) / area_operand# x ** .5
+		return pow(3, .5) / area_operand  # x ** .5
 
 	def __str__(self):
 		return 'Triangle with base ' + str(self.base) + ' and ' + \
@@ -87,13 +87,13 @@ class Triangle(Shape):
 		other: object to check for equality
 		"""
 		return type(other) == Triangle and self.base == other.base \
-				and self.height == other.height
+			and self.height == other.height
 
 #
 # Problem 2: Create the ShapeSet class
 #
-## TO DO: Fill in the following code skeleton according to the
-##    specifications.
+# TO DO: Fill in the following code skeleton according to the
+#    specifications.
 
 class ShapeSet:
 	def __init__(self):
@@ -167,7 +167,7 @@ def readShapesFromFile(filename):
 	inputFile = open(filename)
 	obj = ShapeSet()
 	for cnt, line in enumerate(inputFile):
-		data = split(line.strip(), ',')# string.split(line.strip(), ',')
+		data = split(line.strip(), ',')   # string.split(line.strip(), ',')
 		if len(data) == 3:
 			obj.addShape(Triangle(data[1], data[2]))
 		elif len(data) == 2:
@@ -193,9 +193,10 @@ def test_ShapeSetAndFindLargest():
 def test_readShapesFromFile():
 	dd = readShapesFromFile('shapes.txt')
 	dd = sorted(dd)
-	#print ss
+	# print ss
 	for item in dd:
 		print item
+
 
 test_ShapeSetAndFindLargest()
 test_readShapesFromFile()

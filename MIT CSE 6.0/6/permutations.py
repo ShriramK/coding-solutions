@@ -14,8 +14,8 @@ def permutation_gen(n, l):
 word = "AABBCCDDEE"
 li = []
 for i in range(len(word) + 1):
-	for each in permutation_gen(1, word):# "ABCDE"):
-		# if not each in li:
-		#	li.append(each)
+	for each in permutation_gen(1, word):  # "ABCDE"):
+		'''if not each in li:
+            li.append(each)'''
         li.append(each)
 print li

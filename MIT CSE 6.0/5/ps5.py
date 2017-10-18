@@ -12,8 +12,8 @@ CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, \
-    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, \
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1,
+    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1,
     's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
 }
 
@@ -175,7 +175,7 @@ def is_valid_word(word, hand, word_list):
 	new_hand = hand.copy()
 	con = False
 	for i in word:
-		if hand.get(i, 0):# hand.get(i,0):
+		if hand.get(i, 0):  # hand.get(i,0):
 			con = True
 			if new_hand.get(i, 0):
 				new_hand[i] -= 1
@@ -185,9 +185,9 @@ def is_valid_word(word, hand, word_list):
 			break
 	if not con:
 		return con
-	# for i in new_hand.keys():
-		# if new_hand[i] != 0:
-			# return False
+	'''for i in new_hand.keys():
+		if new_hand[i] != 0:
+			return False'''
 	for i in word_list:
 		if word == i:
 			return True
@@ -252,12 +252,12 @@ def play_hand(hand, word_list):
 			else:
 				print 'Please enter a word'
 				word = raw_input()
-	print 'Total score: ', total,' points.'
+	print 'Total score: ', total, ' points.'
 
 #
 # Problem #5: Playing a game
 # Make sure you understand how this code works!
-# 
+#
 def play_game(word_list):
 	"""
 	Allow the user to play an arbitrary number of hands.
@@ -276,8 +276,8 @@ def play_game(word_list):
 	# TO DO ...
 	# play_hand(deal_hand(HAND_SIZE), word_list)
 	# delete this once you've completed Problem #4
-	## uncomment the following block of code once you've completed Problem #4
-	hand = deal_hand(HAND_SIZE) # random init
+	# uncomment the following block of code once you've completed Problem #4
+	hand = deal_hand(HAND_SIZE)  # random init
 	while True:
 		input_instruction = 'Enter n to deal a new hand, r to replay the last'
 		input_instruction += ' hand, or e to end game: '

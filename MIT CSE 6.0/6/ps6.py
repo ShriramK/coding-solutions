@@ -16,8 +16,8 @@ time_limit = None
 rearrange_dict = None
 
 SCRABBLE_LETTER_VALUES = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1,\
-    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1,\
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1,
+    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1,
     's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
 }
 
@@ -262,7 +262,7 @@ def pick_best_word_faster(hand, rearrange_dict):
 	print 'list_of_chars ', list_of_chars
 	li = list_of_chars
 	res = []
-	for i in range(len(li) + 1):# word) + 1):
+	for i in range(len(li) + 1):  # word) + 1):
 		# res += list(set(choose(li, i)))
 		ans = []
 		for e in choose(li, i):
@@ -271,7 +271,7 @@ def pick_best_word_faster(hand, rearrange_dict):
 		res += ans
 		print list(set(choose(li, i)))
 	print 'Value of res ', res
-	word_combinations = res# get_subsets(res)# li)# get_subsets
+	word_combinations = res  # get_subsets(res)# li)# get_subsets
 	max_score = -1
 	score = 0
 	ans = None
@@ -342,7 +342,7 @@ def play_hand(hand, word_list):
 	initial_handlen = sum(hand.values())
 	# time_limit = float(raw_input('Enter time limit, in seconds, for players:
 	# '))
-	count = time_limit# time_limit
+	count = time_limit  # time_limit
 	# print 'Computer Time Limit ', time_limit
 	while sum(hand.values()) > 0:
 		print 'Current Hand:',
@@ -350,7 +350,7 @@ def play_hand(hand, word_list):
 		start_time = time.time()
 		# user_word = raw_input('Enter word, or a . to indicate that you are
 		# finished: ')
-		user_word = pick_best_word_faster(hand, rearrange_dict)# points_dict)
+		user_word = pick_best_word_faster(hand, rearrange_dict)  # points_dict)
 		# print 'userWord ', user_word
 		if user_word == '.':
 			break
@@ -366,14 +366,15 @@ def play_hand(hand, word_list):
 				print 'Total time exceeds %0.2f seconds. You scored %0.2f '\
 						'points.' % (time_limit, total)
 				break
-			is_valid = is_valid_word(user_word, hand, points_dict)# word_list)
+			is_valid = is_valid_word(user_word, hand, points_dict)
+			# word_list)
 			if not is_valid:
 				print 'Invalid word, please try again.'
 			else:
 				points = get_word_score(user_word, initial_handlen)
 				total += points
 				print '%s earned %d points. Total: %d points'\
-						 % (user_word, points, total)
+					% (user_word, points, total)
 				hand = update_hand(hand, user_word)
 	print 'Total score: %d points.' % total
 
@@ -401,7 +402,7 @@ def play_game(word_list):
     hand = deal_hand(HAND_SIZE) # random init
     while True:
     	input_instruction = 'Enter n to deal a new hand, r to replay the last'
-    	input_instruction += ' hand, or e to end game: ' 
+    	input_instruction += ' hand, or e to end game: '
         cmd = raw_input(input_instruction)
         if cmd == 'n':
             hand = deal_hand(HAND_SIZE)
@@ -416,7 +417,7 @@ def play_game(word_list):
             print "Invalid command."
 
 def get_words_to_points(word_list):
-	""" 
+	"""
 	Return a dict that maps every word in word_list to its point value.
 	"""
 	word_point_value = {}
@@ -441,7 +442,7 @@ def get_word_rearrangements(word_list):
 		# for letter in word:
 		#	new_word.append(letter)
 		# new_word.sort()
-		# get/return the string with 
+		# get/return the string with
 		# "".join(new_word) - (converting a list to a string)
 		sorted_word = "".join(sorted(word))
 		d[sorted_word] = word

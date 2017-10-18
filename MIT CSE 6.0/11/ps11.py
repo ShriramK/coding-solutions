@@ -40,16 +40,16 @@ class Position(object):
 		Returns: a Position object representing the new position.
 		"""
 		old_x, old_y = self.getX(), self.getY()
-		#print 'old_x ', old_x
-		#print 'old_y ', old_y
-		#print 'speed ', speed, 'angle ', angle
+		# print 'old_x ', old_x
+		# print 'old_y ', old_y
+		# print 'speed ', speed, 'angle ', angle
 		# Compute the change in position
 		delta_y = speed * math.cos(math.radians(angle))
 		delta_x = speed * math.sin(math.radians(angle))
 		# Add that to the existing position
 		new_x = old_x + delta_x
 		new_y = old_y + delta_y
-		#print 'newx ' , new_x, ' newy ', new_y
+		# print 'newx ' , new_x, ' newy ', new_y
 		return Position(new_x, new_y)
 
 
@@ -85,9 +85,9 @@ class RectangularRoom(object):
 
 		pos: a Position
 		"""
-		#print 'cleanTileAtPosition ',
-		#print 'pos.getX() ', pos.getX(),
-		#print 'pos.getY() ', pos.getY()
+		# print 'cleanTileAtPosition ',
+		# print 'pos.getX() ', pos.getX(),
+		# print 'pos.getY() ', pos.getY()
 		self.tileArray[int(pos.getX()) - 1][int(pos.getY()) - 1] = 0
 		self.cleaned += 1
 
@@ -101,7 +101,8 @@ class RectangularRoom(object):
 		n: an integer
 		returns: True if (m, n) is cleaned, False otherwise
 		"""
-		return self.tileArray[int(m)][int(n)] == 0# pos.getX()][pos.getY()] == 0
+		return self.tileArray[int(m)][int(n)] == 0
+		# pos.getX()][pos.getY()] == 0
 
 	def getNumTiles(self):
 		"""
@@ -125,8 +126,9 @@ class RectangularRoom(object):
 
 		returns: a Position object.
 		"""
-		return Position(random.randrange(0, self.width), \
-						random.randrange(0, self.height))
+		return Position(
+			random.randrange(0, self.width),
+			random.randrange(0, self.height))
 	def isPositionInRoom(self, pos):
 		"""
 		Return True if POS is inside the room.
@@ -137,7 +139,7 @@ class RectangularRoom(object):
 		xCoord = pos.getX()
 		yCoord = pos.getY()
 		return xCoord >= 0 and xCoord < self.width and yCoord >= 0 and \
-				yCoord < self.height
+			yCoord < self.height
 
 class BaseRobot(object):
     """
@@ -150,7 +152,7 @@ class BaseRobot(object):
     implementing updatePositionAndClean(), which simulates a single
     time-step.
     """
-    def __init__(self, room=None, speed=None): #define default values
+    def __init__(self, room=None, speed=None):  # define default values
 		"""
 		Initializes a Robot with the given speed in the specified
 		room. The robot initially has a random direction d and a
@@ -169,9 +171,10 @@ class BaseRobot(object):
 		self.d = random.randrange(0, 360)
 		self.p = room.getRandomPosition()
 		# self.p = position
-		positionObj = Position(random.randrange(0, self.room.width), \
-								random.randrange(0, self.room.height))
-		self.p = positionObj# self.room.getRandomPosition() gives a NoneType error
+		positionObj = Position(
+			random.randrange(0, self.room.width),
+			random.randrange(0, self.room.height))
+		self.p = positionObj  # self.room.getRandomPosition() gives a NoneType error
 
     def getRobotPosition(self):
 		"""
@@ -211,7 +214,8 @@ class Robot(BaseRobot):
 	direction; when it hits a wall, it chooses a new direction
 	randomly.
 	"""
-	def __init__(self, room=None, speed=None): #whole init block added by me from inheritance e.g
+	def __init__(self, room=None, speed=None):
+		# whole init block added by me from inheritance e.g
 		BaseRobot.__init__(self, room, speed)
 
 	def updatePositionAndClean(self):
@@ -222,43 +226,43 @@ class Robot(BaseRobot):
 		been cleaned.
 		"""
 		oldPosition = self.p
-		print 'self.d ', self.d,' self.speed ', self.speed
+		print 'self.d ', self.d, ' self.speed ', self.speed
 		newPosition = oldPosition.getNewPosition(self.d, self.speed)
-		newDirection = self.d# None#random.randrange(0, 360)#-1
+		newDirection = self.d  # None#random.randrange(0, 360)#-1
 		triedDirections = []
-		triedDirections.append(self.d)# newDirection)
-		# check if position in room 
+		triedDirections.append(self.d)  # newDirection)
+		'''check if position in room
 			# if in room
 				# check if tile is not already cleaned
 					# if not cleaned
 						# break
 					# else
 						# getNewPosition
-			# else 
-				# getNewPosition
-		
+			# else
+				# getNewPosition'''
+
 		while True:
 			if self.room.isPositionInRoom(newPosition):
 				# print 'In Room '
-				if self.room.isTileCleaned(newPosition.getX(), \
-											newPosition.getY()):
+				if self.room.isTileCleaned(
+					newPosition.getX(), newPosition.getY()):
 					# print 'Is Cleaned'
 					newDirection = retrieveNewDirection(triedDirections)
-					newPosition = oldPosition.getNewPosition(newDirection, \
-															self.speed)
+					newPosition = oldPosition.getNewPosition(
+						newDirection, self.speed)
 				else:
 					# print 'Is not Cleaned'
 					break
 			else:
 				# print 'Is not in Room'
 				newDirection = retrieveNewDirection(triedDirections)
-				newPosition = oldPosition.getNewPosition(newDirection, \
-															self.speed)
+				newPosition = oldPosition.getNewPosition(
+					newDirection, self.speed)
 			# print 'numCleaned' , self.room.getNumCleanedTiles(),
 			# print 'size of triedDirection ', len(triedDirections)
 				
 		self.setRobotPosition(newPosition)
-		self.setRobotDirection(newDirection)			
+		self.setRobotDirection(newDirection)
 		self.room.cleanTileAtPosition(newPosition)
 
 def retrieveNewDirection(triedDirections):
@@ -269,7 +273,7 @@ def retrieveNewDirection(triedDirections):
 		if newDirection in triedDirections:
 			newDirection = random.randrange(0, 360)
 		else:
-			triedDirections.append(newDirection)		
+			triedDirections.append(newDirection)
 			break
 	return newDirection
 
@@ -303,7 +307,7 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
 	visualize = False
 	totalAns = []
 	totalTiles = width * height
-	rRoom = RectangularRoom(width, height)	
+	rRoom = RectangularRoom(width, height)
 	for robotObj in range(1, num_robots):
 		robotObject = robot_type(rRoom, speed)
 		ans = []
@@ -324,9 +328,9 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
 	return totalAns
 
 # create Robot object
-rRoom = RectangularRoom(20, 20)# width, height)
-# robotObj = Robot(rRoom, 20)	
-avg = runSimulation(2, 1.0, 15, 20, 0.8, 5, Robot, False);
+rRoom = RectangularRoom(20, 20)  # width, height)
+# robotObj = Robot(rRoom, 20)
+avg = runSimulation(2, 1.0, 15, 20, 0.8, 5, Robot, False)
 
 # === Provided function
 def computeMeans(list_of_lists):

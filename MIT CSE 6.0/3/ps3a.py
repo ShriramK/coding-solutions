@@ -18,12 +18,13 @@ def countSubStringMatch(target, key):
 def countSubStringMatchRecursive(target, key):
 	cnt = 0
 	index = find(target, key)
-	if index != -1:# and index + 1 <= len(target) ):
+	if index != -1:  # and index + 1 <= len(target) ):
 		target = target[index + 1:]
 		cnt = 1 + countSubStringMatchRecursive(target, key)
 	return cnt
-	
+
+
 if __name__ == '__main__':
 	# print countSubStringMatchRecursive("aaaa", "a")
 	print countSubStringMatchRecursive(target1, key13)
-	print countSubStringMatchRecursive(target2, key13)	
+	print countSubStringMatchRecursive(target2, key13)

@@ -46,7 +46,7 @@ def subStringMatchExactRecursive(target, key):
 	else:
 		dlist = []
 	return tuple(dlist)
-	
+
 """
 def subStringMatchExactRecursive(target, key):
 	#dlist = ()
@@ -67,14 +67,15 @@ def subStringMatchExactRecursive(target, key):
 def subStringMatchExactRecursive(target, key):
 	index = find(target, key)
 	if index != -1:
-		dlist = (len(target1)-len(target)+index,) + subStringMatchExactRecursive(target[index+1:], key)
+		dlist = (len(target1)-len(target)+index,) +
+				subStringMatchExactRecursive(target[index+1:], key)
 	else:
 		dlist = tuple()
 	return dlist
 """
 
 if __name__ == '__main__':
-	print 'iterative',subStringMatchExact(target1, key10)
+	print 'iterative', subStringMatchExact(target1, key10)
 	# print 'recursive',subStringMatchExactRecursive(target1, key10)
 	# print 'recursive',subStringMatchExactRecursive(target3, key10)
-	print subStringMatchExactRecursive('abcd','e')
+	print subStringMatchExactRecursive('abcd', 'e')

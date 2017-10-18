@@ -48,7 +48,6 @@ def testNestEggFixed():
 #
 
 def nestEggVariable(salary, save, growthRates):
-# TODO: Your code here.
 	"""
 	- salary: the amount of money you make each year.
 	- save: the percent of your salary to save in the investment account each
@@ -58,7 +57,7 @@ def nestEggVariable(salary, save, growthRates):
 	- return: a list of your retirement account value at the end of each year.
 	"""
 	product_num = reduce(operator.mul, [salary, save, 0.01])
-	newList =[]
+	newList = []
 	for i in growthRates:
 		newList.append(0)
 	cnt = 0
@@ -68,7 +67,7 @@ def nestEggVariable(salary, save, growthRates):
 		else:
 			newList[cnt] = newList[cnt-1]*(1+0.01*i) + product_num
 		cnt += 1
-	return newList	
+	return newList
 
 def testNestEggVariable():
     salary = 10000
@@ -127,17 +126,19 @@ def recurseFunc(low, high, postRetireGrowthRates, savings, epsilon):
 	expenses = (low+high) / 2
 	print 'low ', low, ' high ', high, ' expenses ', expenses	
 	print 'Current estimate of expenses ', expenses
-	rem = postRetirement(savings, postRetireGrowthRates, expenses )
+	rem = postRetirement(savings, postRetireGrowthRates, expenses)
 	print 'Rem ', rem[len(rem) - 1]
 	val = rem[len(rem) - 1]
 	if abs(val) >= 0 and abs(val) < epsilon:
 		return expenses
 	elif val < 0:
-		expenses = recurseFunc(low, expenses, postRetireGrowthRates, savings, \
-								epsilon)
+		expenses = recurseFunc(
+						low, expenses, postRetireGrowthRates, savings,
+						epsilon)
 	elif val >= epsilon:
-		expenses = recurseFunc(expenses, high, postRetireGrowthRates, \
-								savings, epsilon)
+		expenses = recurseFunc(
+						expenses, high, postRetireGrowthRates,
+						savings, epsilon)
 	return expenses
 
 def findMaxExpenses(salary, save, preRetireGrowthRates, postRetireGrowthRates,
@@ -172,7 +173,7 @@ def testFindMaxExpenses():
     print expenses
     # Output should have a value close to:
     # 1229.95548986
-	# got an answer of 1229.95528606
+    # got an answer of 1229.95528606
     # TODO: Add more test cases here.
 
 if __name__ == '__main__':

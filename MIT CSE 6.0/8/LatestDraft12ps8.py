@@ -13,6 +13,7 @@ import string
 SUBJECT_FILENAME = "subjects.txt"
 VALUE, WORK = 0, 1
 
+
 #
 # Problem 1: Building A Subject Dictionary
 #
@@ -37,8 +38,7 @@ def loadSubjects(filename):
 	# TODO: Instead of printing each line, modify the above to parse the name,
 	# value, and work of each subject and create a dictionary mapping the name
 	# to the (value, work).
-	
-	
+
 
 def printSubjects(subjects):
     """
@@ -57,7 +57,7 @@ def printSubjects(subjects):
         res = res + s + '\t' + str(val) + '\t' + str(work) + '\n'
         totalVal += val
         totalWork += work
-    res = res + '\nTotal Value:\t' + str(totalVal) +'\n'
+    res = res + '\nTotal Value:\t' + str(totalVal) + '\n'
     res = res + 'Total Work:\t' + str(totalWork) + '\n'
     print res
 
@@ -73,8 +73,9 @@ def bruteForceAdvisor(subjects, maxWork):
     """
     nameList = subjects.keys()
     tupleList = subjects.values()
-    bestSubset, bestSubsetValue = bruteForceAdvisorHelper(tupleList, maxWork, \
-                                  0, None, None, [], 0, 0)
+    bestSubset, bestSubsetValue = bruteForceAdvisorHelper(
+                                    tupleList, maxWork, 0, None, None, [], 0,
+                                    0)
     outputSubjects = {}
     for i in bestSubset:
         outputSubjects[nameList[i]] = tupleList[i]
@@ -84,7 +85,7 @@ def bruteForceAdvisorHelper(subjects, maxWork, i, bestSubset, bestSubsetValue,
                             subset, subsetValue, subsetWork):
     # Hit the end of the list.
     if i >= len(subjects):
-        if bestSubset == None or subsetValue > bestSubsetValue:
+        if bestSubset is None or subsetValue > bestSubsetValue:
             # Found a new best.
             return subset[:], subsetValue
         else:
@@ -95,12 +96,12 @@ def bruteForceAdvisorHelper(subjects, maxWork, i, bestSubset, bestSubsetValue,
         # Try including subjects[i] in the current working subset.
         if subsetWork + s[WORK] <= maxWork:
             subset.append(i)
-            bestSubset, bestSubsetValue = bruteForceAdvisorHelper(subjects,
-                    maxWork, i + 1, bestSubset, bestSubsetValue, subset,
-                    subsetValue + s[VALUE], subsetWork + s[WORK])
+            bestSubset, bestSubsetValue = bruteForceAdvisorHelper(
+                    subjects, maxWork, i + 1, bestSubset, bestSubsetValue,
+                    subset, subsetValue + s[VALUE], subsetWork + s[WORK])
             subset.pop()
-        bestSubset, bestSubsetValue = bruteForceAdvisorHelper(subjects,
-                maxWork, i + 1, bestSubset, bestSubsetValue, subset,
+        bestSubset, bestSubsetValue = bruteForceAdvisorHelper(
+                subjects, maxWork, i + 1, bestSubset, bestSubsetValue, subset,
                 subsetValue, subsetWork)
         return bestSubset, bestSubsetValue
 
@@ -125,11 +126,15 @@ def bruteForceTime():
 # ======================
 #
 # TODO: write here your observations regarding bruteForceTime's performance
-#It performs well until maxWork = 5 as it reaches approximately 1.2 seconds, and anything beyond it nearly triples or quadraples the time it took in the previous iteration
+# It performs well until maxWork = 5 as it reaches approximately 1.2 seconds,
+# and anything beyond it nearly triples or quadraples the time it took in the
+# previous iteration
 
-#it's a dictionary that maps list of subjects to sum of its values
-res = {} #subscripting it gives a tuple of value and work
-#res =[]
+
+# it's a dictionary that maps list of subjects to sum of its values
+res = {}  # subscripting it gives a tuple of value and work
+# res = []
+
 
 #
 # Problem 4: Subject Selection By Dynamic Programming
@@ -146,43 +151,43 @@ def dpAdvisor(subjects, maxWork):
 	# TODO...
 	temp, li = {}, list(subjects)
 	index = 0
-	
-	#print ' subjects  ' , subjects
+
+	# print ' subjects  ' , subjects
 	start_time = time.time()
 	print 'start_time ', start_time
 	values = []
 	works = []
 	xvalue = len(subjects)
 	yvalue = maxWork
-	
+
 	for item in subjects.keys():
 		works.append(subjects[item][WORK])
 		values.append(subjects[item][VALUE])
-	#print 'works ', works
+	# print 'works ', works
 
 	for i in range(1, xvalue + 1):
 		for j in range(1, yvalue + 1):
-			#print i, j, '*', type(i), type(j)
-			res[i, j] = [-1, []] #-1#res[i][j] = -1
+			# print i, j, '*', type(i), type(j)
+			res[i, j] = [-1, []]  # -1#res[i][j] = -1
 	print
 	listOfSubjects = subjects.keys()
-	result = dpAdvisorHelper(works, values, len(subjects), maxWork, \
-							listOfSubjects)
+	result = dpAdvisorHelper(works, values, len(subjects), maxWork,
+                          listOfSubjects)
 	for item in result[WORK]:
 		temp[item] = subjects[item]
-		
+
 	end_time = time.time()
 	print 'end_time ', end_time
-	print 'Difference ' , end_time - start_time, '\n'
-	#print 'length ', len(res)
-	#print 'res ', res
+	print 'Difference ', end_time - start_time, '\n'
+	# print 'length ', len(res)
+	# print 'res ', res
 	"""
 	max = -1
 	subjectSet = []
 	index = 0
 	#if len(res) >0:
 	start_time = time.time()
-	print 'start_time ', start_time	
+	print 'start_time ', start_time
 	for i in res.keys():
 		#print 'res[i] ' ,res[i], 'res[i][VALUE] ', res[i][VALUE]
 		#print 'max ' , max, ' i ' , i
@@ -201,8 +206,9 @@ def dpAdvisor(subjects, maxWork):
 	"""
 	return temp
 
-#return value: total Value accumulated so far, combination of subjects
-def dpAdvisorHelper( works, values, length, maxWork, listOfSubjects ):
+
+# return value: total Value accumulated so far, combination of subjects
+def dpAdvisorHelper(works, values, length, maxWork, listOfSubjects):
 	bestSubSet = []
 	difference = works[length - 1] - maxWork
 	if not length or not maxWork:
@@ -210,21 +216,23 @@ def dpAdvisorHelper( works, values, length, maxWork, listOfSubjects ):
 	else:
 		if res[length, maxWork][VALUE] == -1:
 			if difference > 0:
-				res[length, maxWork] = dpAdvisorHelper(works, values, \
-														length - 1, maxWork, \
-														listOfSubjects)
+				res[length, maxWork] = dpAdvisorHelper(
+										works, values, length - 1, maxWork,
+										listOfSubjects)
 			elif difference <= 0:
-				prevOne = dpAdvisorHelper(works, values, length - 1, maxWork,\
-										 listOfSubjects)
+				prevOne = dpAdvisorHelper(
+										works, values, length - 1, maxWork,
+										listOfSubjects)
 				subResultOne = prevOne[:]
 				newMaxWork = maxWork - works[length-1]
-				prevTwo = dpAdvisorHelper(works, values, length - 1, \
-											newMaxWork, listOfSubjects)
+				prevTwo = dpAdvisorHelper(
+										works, values, length - 1,
+										newMaxWork, listOfSubjects)
 				subResultTwo = prevTwo[:]
 				subResultTwo[VALUE] += values[length - 1]
 				maxValue = max(subResultTwo[VALUE], subResultOne[VALUE])
 				if maxValue == subResultTwo[VALUE]:
-					bestSubSet.append(listOfSubjects[length - 1])	
+					bestSubSet.append(listOfSubjects[length - 1])
 					for subject in subResultTwo[WORK]:
 						bestSubSet.append(subject)
 				else:
@@ -233,6 +241,8 @@ def dpAdvisorHelper( works, values, length, maxWork, listOfSubjects ):
 				res[length, maxWork] = [maxValue, bestSubSet]
 		ret = res[length, maxWork]
 	return ret
+
+
 #
 # Problem 5: Performance Comparison
 #
@@ -243,28 +253,30 @@ def dpTime():
 	"""
 	# TODO...
 	newDictionary = loadSubjects("subjects.txt")
-	
+
 	for i in range(31):
-		#if i == 30:
+		# if i == 30:
 		print 'i', i
-		print '******************* DP ***************'		
+		print '******************* DP ***************'
 		start_time = time.time()
-		#print start_time
+		# print start_time
 		selected = dpAdvisor(newDictionary, i + 1)
-		print 'res ', res	
+		print 'res ', res
 		printSubjects(selected)
 		end_time = time.time()
 		print end_time-start_time
 		res = {}
-		print '****************** BF ****************'		
+		print '****************** BF ****************'
 		start_time = time.time()
-		#print start_time
+		# print start_time
 		selected = bruteForceAdvisor(newDictionary, i + 1)
 		printSubjects(selected)
 		end_time = time.time()
 		print end_time-start_time
-#dpTime()
-#smallCatalog = {'6.00': (16, 8), '1.00':(7,7),'6.01':(5,3),'15.01':(9,6)}
+
+
+# dpTime()
+# smallCatalog = {'6.00': (16, 8), '1.00':(7,7),'6.01':(5,3),'15.01':(9,6)}
 smallCatalog = {
 				'6.00': (16, 8),
 				'1.00': (7, 7),
@@ -272,14 +284,14 @@ smallCatalog = {
 				'15.01': (9, 6),
 				'9.00': (10, 2)
 }
-#smallCatalog = {'6.00':(4,4), '1.00':(2,2), '6.01':(3,3), '15.01':(1,1)}
-#smallCatalog = {'6.00':(1,1), '1.00':(2,2), '6.01':(3,3), '15.01':(4,4)}
-#print greedyAdvisor(smallCatalog, 15, cmpValue)
-#l = [ cmpValue, cmpWork, cmpRatio ]
-#for i in l:
-	#print greedyAdvisor(smallCatalog, 15, i)#cmpWork)#cmpValue)
+# smallCatalog = {'6.00':(4,4), '1.00':(2,2), '6.01':(3,3), '15.01':(1,1)}
+# smallCatalog = {'6.00':(1,1), '1.00':(2,2), '6.01':(3,3), '15.01':(4,4)}
+# print greedyAdvisor(smallCatalog, 15, cmpValue)
+# l = [ cmpValue, cmpWork, cmpRatio ]
+'''for i in l:
+	print greedyAdvisor(smallCatalog, 15, i)#cmpWork)#cmpValue)'''
 
-#newDict = smallCatalog
+# newDict = smallCatalog
 newDict = loadSubjects("subjects.txt")
 """
 for i in l:
@@ -288,10 +300,11 @@ for i in l:
 	printSubjects(selected)
 """
 
-#bruteForceTime()
-#print dpAdvisor(smallCatalog, 16)
-for i in range(1, 31):#22):#31):#(10,15):#15):#7):#20):#(31):#16):#(10):
-#(6):#(15)
+
+# bruteForceTime()
+# print dpAdvisor(smallCatalog, 16)
+for i in range(1, 31):  # 22):#31):#(10,15):#15):#7):#20):#(31):#16):#(10):
+	# (6):#(15)
 	"""
 	print ' maxWork ' , i
 	print '******************************** '
@@ -301,9 +314,9 @@ for i in range(1, 31):#22):#31):#(10,15):#15):#7):#20):#(31):#16):#(10):
 	"""
 	print '******************************** '
 	print ' D  P maxWork ', i
-	selected = dpAdvisor(newDict, i)#15)
+	selected = dpAdvisor(newDict, i)  # 15)
 	printSubjects(selected)
-	res = {}#[]#{}
+	res = {}  # []#{}
 """
 newDictionary = loadSubjects("subjects.txt")
 for i in range(31):

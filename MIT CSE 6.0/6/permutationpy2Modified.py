@@ -2,6 +2,7 @@ import sys
 
 list_of_words = []
 
+
 def generate_permutations(num_of_chars=4):
 	# modify if in need!
 	allowed_chars = ['a', 'b', 'c', 'd', 'e']
@@ -23,6 +24,7 @@ def generate_permutations(num_of_chars=4):
 				status[pos] += 1
 				break
 	return rows
+
 
 for i in range(3):
 	print len(generate_permutations(i))

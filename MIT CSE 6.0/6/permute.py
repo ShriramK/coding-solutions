@@ -14,8 +14,9 @@ print subs
 """
 # seq = {'a': 1, 'c': 1, 'f': 1, 'i': 1, 's': 1, 't': 1, 'x': 1}
 # seq = {'a': 1, 'c': 1, 'f': 1, 'i': 1, 's': 1, 't': 1, 'x': 1}
-seq  = "acfistx"
-seq  = "abc"
+seq = "acfistx"
+seq = "abc"
+
 
 def powerset(seq):
 	if len(seq):
@@ -23,4 +24,6 @@ def powerset(seq):
 		return head + [item + [seq[-1]] for item in head]
 	else:
 		return [[]]
+
+
 print powerset(seq)
